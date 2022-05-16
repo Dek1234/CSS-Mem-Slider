@@ -1,0 +1,233 @@
+:root {
+    --slider-width: 600px;
+    --number: 4;
+    --color-border: rgb(205, 233, 24);
+    --color-bg: rgb(17, 12, 12);
+    --color-text: rgb(232, 232, 232);
+    --color-hover: #ffffff;
+  }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  html {
+    font-size: 10px;
+  }
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2rem;
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    width: 100%;
+    height: 100vh;
+  }
+  .hidden {
+    visibility: hidden;
+  }
+  
+  .container {
+    width: var(--slider-width);
+    height: 60%;
+    margin: 1rem auto;
+  }
+  
+  .slider_wrap {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-color: var(--color-bg);
+    overflow: hidden;
+    display: grid;
+    grid-template-rows: 3fr 1fr;
+    grid-template-columns: 3fr 1fr;
+    grid-template-areas:
+      'content content'
+      'description control';
+    row-gap: 4rem;
+  }
+  
+  .slider_wrap > input {
+    display: none;
+  }
+  .slider_wrap-content,
+  .slider_wrap-text {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+  }
+  .slider_wrap-content {
+    grid-area: content;
+  }
+  .slider_content,
+  .slider_description {
+    display: flex;
+    width: 100% * var(--number);
+    height: 100%;
+    transition: transform 1s ease;
+  }
+  .slider_content .slide {
+    display: inline-block;
+    width: var(--slider-width);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    border-radius: 1rem;
+  }
+  
+  .slider_content .slide-1 {
+    background-image: url('https://static.jojowiki.com/images/3/33/latest/20191015212712/Torture_dance.gif');
+  }
+  .slider_content .slide-2 {
+    background-image: url('https://pa1.narvii.com/6433/949a46eea43b6a329fa7e025049190222156c13d_hq.gif');
+  }
+  .slider_content .slide-3 {
+    background-image: url('https://thumbs.gfycat.com/WelldocumentedEvilAmethystsunbird-size_restricted.gif');
+  }
+  .slider_content .slide-4 {
+    background-image: url('https://thumbs.gfycat.com/EllipticalAthleticGoat-size_restricted.gif');
+  }
+  .slider_wrap-text {
+    grid-area: description;
+  }
+  .slider_description .slide {
+    display: inline-block;
+    width: var(--slider-width);
+    height: 100%;
+    padding-right: 11rem;
+  }
+  .slider_control {
+    display: flex;
+    justify-content: space-around;
+    grid-area: control;
+  }
+  
+  .slider_control label {
+    position: relative;
+    display: inline-block;
+    padding: 2.4rem;
+    cursor: pointer;
+    transition: all 0.5s ease-out;
+  }
+  .slider_control label::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(50%, 50%);
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 50%;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-bg);
+    transition: all 0.5s ease-out;
+  }
+  .slider_control label:hover:before {
+    border: 1px solid var(--color-hover);
+    background-color: var(--color-hover);
+  }
+  #r1:checked ~ .slider_wrap-content .slider_content,
+  #r1:checked ~ .slider_wrap-text .slider_description {
+    transform: translateX(0%);
+  }
+  
+  #r2:checked ~ .slider_wrap-content .slider_content,
+  #r2:checked ~ .slider_wrap-text .slider_description {
+    transform: translateX(-25%);
+  }
+  
+  #r3:checked ~ .slider_wrap-content .slider_content,
+  #r3:checked ~ .slider_wrap-text .slider_description {
+    transform: translateX(-50%);
+  }
+  
+  #r4:checked ~ .slider_wrap-content .slider_content,
+  #r4:checked ~ .slider_wrap-text .slider_description {
+    transform: translateX(-75%);
+  }
+  #r1:checked ~ .slider_control .slider_control-1::before {
+    background-color: var(--color-border);
+  }
+  #r2:checked ~ .slider_control .slider_control-2::before {
+    background-color: var(--color-border);
+  }
+  #r3:checked ~ .slider_control .slider_control-3::before {
+    background-color: var(--color-border);
+  }
+  #r4:checked ~ .slider_control .slider_control-4::before {
+    background-color: var(--color-border);
+  }
+  
+  @media screen and (max-width: 720px) {
+    html {
+      font-size: 8px;
+    }
+    .slider_wrap {
+      grid-template-rows: 3fr 40px 40px;
+      grid-template-columns: 1fr;
+      grid-gap: 1rem;
+      grid-template-areas:
+        'content'
+        'control'
+        'description';
+    }
+    .slider_control {
+      justify-content: center;
+    }
+    .slider_control label {
+      margin-right: 1.2rem;
+    }
+    .slider_control label:last-of-type {
+      margin-right: 0;
+    }
+    .slider_description .slide {
+      text-align: center;
+      padding: 0;
+    }
+    .slider_control label::before {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  @media screen and (max-width: 425px) {
+    html {
+      font-size: 12px;
+    }
+    .container {
+      width: 400px;
+      height: 60%;
+      margin: 1rem auto;
+    }
+    .slider_wrap {
+      grid-template-rows: 3fr 40px 40px;
+      grid-template-columns: 1fr;
+      grid-gap: 1rem;
+      grid-template-areas:
+        'content'
+        'control'
+        'description';
+    }
+    .slider_control {
+      justify-content: center;
+    }
+    .slider_control label {
+      margin-right: 1.2rem;
+    }
+    .slider_control label:last-of-type {
+      margin-right: 0;
+    }
+    .slider_description .slide {
+      text-align: center;
+      padding: 0;
+    }
+    .slider_control label::before {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+  
